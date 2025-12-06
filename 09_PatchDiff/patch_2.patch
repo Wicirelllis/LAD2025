@@ -1,0 +1,43 @@
+--- maze_1.c	2025-12-06 16:24:21.780947072 +0300
++++ maze_2.c	2025-12-06 16:29:38.713483902 +0300
+@@ -4,7 +4,9 @@
+ 
+ 
+ int main(int argc, char** argv) {
+-    int maze_size = atoi(argv[1]);
++    char c_pass = argv[1][0];
++    char c_wall = argv[1][1];
++    int maze_size = atoi(argv[2]);
+     // 1 - room is visited, 0 - room is not visited
+     int rooms[maze_size][maze_size] = {};
+     // 0 - wall is present, 1 - wall is absent
+@@ -80,9 +82,9 @@
+     for (int i = 0; i < art_size; i++) {
+         for (int j = 0; j < art_size; j++) {
+             if (i % 2 == 1 && j % 2 == 1) {
+-                art[i][j] = '.';
++                art[i][j] = c_pass;
+             } else {
+-                art[i][j] = '#';
++                art[i][j] = c_wall;
+             }
+         }
+     }
+@@ -90,7 +92,7 @@
+     for (int i = 0; i < maze_size-1; i++) {
+         for (int j = 0; j < maze_size; j++) {
+             if (v_walls[i][j]) {
+-                art[2*i+2][2*j+1] = '.';
++                art[2*i+2][2*j+1] = c_pass;
+             }
+         }
+     }
+@@ -98,7 +100,7 @@
+     for (int i = 0; i < maze_size; i++) {
+         for (int j = 0; j < maze_size-1; j++) {
+             if (h_walls[i][j]) {
+-                art[2*i+1][2*j+2] = '.';
++                art[2*i+1][2*j+2] = c_pass;
+             }
+         }
+     }

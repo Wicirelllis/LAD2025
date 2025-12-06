@@ -1,0 +1,28 @@
+--- maze_2.c	2025-12-06 16:29:38.713483902 +0300
++++ maze_3.c	2025-12-06 16:31:18.786087791 +0300
+@@ -1,12 +1,12 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+-#include <time.h>
+ 
+ 
+ int main(int argc, char** argv) {
+-    char c_pass = argv[1][0];
+-    char c_wall = argv[1][1];
+-    int maze_size = atoi(argv[2]);
++    int seed = atoi(argv[1]);
++    char c_pass = argv[2][0];
++    char c_wall = argv[2][1];
++    int maze_size = atoi(argv[3]);
+     // 1 - room is visited, 0 - room is not visited
+     int rooms[maze_size][maze_size] = {};
+     // 0 - wall is present, 1 - wall is absent
+@@ -16,7 +16,7 @@
+     int visited_rooms_count = 1;
+     
+     // fix seed
+-    srand(time(NULL));
++    srand(seed);
+     
+     // current room coordinates
+     int x = rand() % maze_size;

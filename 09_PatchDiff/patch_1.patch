@@ -1,0 +1,85 @@
+--- maze_0.c	2025-12-06 16:23:49.243883236 +0300
++++ maze_1.c	2025-12-06 16:24:21.780947072 +0300
+@@ -2,15 +2,14 @@
+ #include <stdlib.h>
+ #include <time.h>
+ 
+-#define MAZE_SIZE 6
+-
+ 
+ int main(int argc, char** argv) {
++    int maze_size = atoi(argv[1]);
+     // 1 - room is visited, 0 - room is not visited
+-    int rooms[MAZE_SIZE][MAZE_SIZE] = {};
++    int rooms[maze_size][maze_size] = {};
+     // 0 - wall is present, 1 - wall is absent
+-    int v_walls[MAZE_SIZE - 1][MAZE_SIZE] = {};
+-    int h_walls[MAZE_SIZE][MAZE_SIZE - 1] = {};
++    int v_walls[maze_size - 1][maze_size] = {};
++    int h_walls[maze_size][maze_size - 1] = {};
+ 
+     int visited_rooms_count = 1;
+     
+@@ -18,11 +17,11 @@
+     srand(time(NULL));
+     
+     // current room coordinates
+-    int x = rand() % MAZE_SIZE;
+-    int y = rand() % MAZE_SIZE;
++    int x = rand() % maze_size;
++    int y = rand() % maze_size;
+     rooms[x][y] = 1;
+ 
+-    while (visited_rooms_count < MAZE_SIZE * MAZE_SIZE) {
++    while (visited_rooms_count < maze_size * maze_size) {
+         switch (rand() % 4) {
+             case 0:
+                 // go left
+@@ -38,7 +37,7 @@
+                 break;
+             case 1:
+                 // go right
+-                if (x == MAZE_SIZE-1) {
++                if (x == maze_size-1) {
+                     continue;
+                 }
+                 if (!rooms[x+1][y]) {
+@@ -62,7 +61,7 @@
+                 break;
+             case 3:
+                 // go up
+-                if (y == MAZE_SIZE-1) {
++                if (y == maze_size-1) {
+                     continue;
+                 }
+                 if (!rooms[x][y+1]) {
+@@ -75,7 +74,7 @@
+         }
+     }
+ 
+-    int art_size = 2 * MAZE_SIZE + 1;
++    int art_size = 2 * maze_size + 1;
+     char art[art_size][art_size];
+     // init
+     for (int i = 0; i < art_size; i++) {
+@@ -88,16 +87,16 @@
+         }
+     }
+     // break the v-walls
+-    for (int i = 0; i < MAZE_SIZE-1; i++) {
+-        for (int j = 0; j < MAZE_SIZE; j++) {
++    for (int i = 0; i < maze_size-1; i++) {
++        for (int j = 0; j < maze_size; j++) {
+             if (v_walls[i][j]) {
+                 art[2*i+2][2*j+1] = '.';
+             }
+         }
+     }
+     // break the h-walls
+-    for (int i = 0; i < MAZE_SIZE; i++) {
+-        for (int j = 0; j < MAZE_SIZE-1; j++) {
++    for (int i = 0; i < maze_size; i++) {
++        for (int j = 0; j < maze_size-1; j++) {
+             if (h_walls[i][j]) {
+                 art[2*i+1][2*j+2] = '.';
+             }
